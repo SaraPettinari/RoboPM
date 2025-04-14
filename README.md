@@ -2,11 +2,12 @@
 
 This repository provides tools for both data preparation and mission analysis of robotic systems.
 
-![abstract](src/img/abstract.png "Robot & Process Mining Core Idea")
+![abstract](src/img/abstract.png)
+*Fig. 1: Robot & Process Mining Core Idea*
 
-* *Data Preparation*: A set of scripts automatically processes raw data collected during robot execution, converting it into structured event logs ready for process mining. These scripts are designed specifically for ROS-based systems, leveraging ROS as the standard for robot software development.
+* **_Data Preparation_**: A set of scripts automatically processes raw data collected during robot execution, converting it into structured event logs ready for process mining. These scripts are designed specifically for ROS-based systems, leveraging ROS as the standard for robot software development.
 
-* *Mission Analysis*: The included RoboTrace tool supports process discovery and enhancement from multiple perspectives, enabling deep insights into robotic behavior and workflows via process mining.
+* **_Mission Analysis_**: The included RoboTrace tool supports process discovery and enhancement from multiple perspectives, enabling deep insights into robotic behavior and workflows via process mining.
 
 Both components can be used independently or together, offering flexibility depending on your workflow needs.
 
@@ -15,6 +16,8 @@ Both components can be used independently or together, offering flexibility depe
 The reference methodology aims to support the robotic developer in the automatic extraction of robotic event logs from the execution of a robotic system and analyze them through process mining.
 
 ![methodology](src/img/methodology.png)
+*Fig. 2: Reference Methodology*
+
 
 The methodology has been designed to foster the application of process mining and the development of techniques suitable for robotic systems. It allows the system designer to specify tags in the source code and transform them into events to be inserted into the log. The generated event logs are enriched with multi-perspective information (as space, communication, and battery), thus defining a multi-perspective event log, suitable for the application of process mining techniques.
 
@@ -28,3 +31,5 @@ The methodology has been designed to foster the application of process mining an
 
 * Corradini, F., Pettinari, S., Re, B., Rossi, L., Tiezzi, F. (2024). A Methodology for the Analysis of Robotic Systems via Process Mining. In: Enterprise Design, Operations, and Computing. EDOC 2023. Lecture Notes in Computer Science, vol 14367. Springer. [[link](https://link.springer.com/chapter/10.1007/978-3-031-46587-1_7)]
 
+## Note
+The robotic warehouse scenario in Fig. 1 is AI-generated.
