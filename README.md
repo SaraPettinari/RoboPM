@@ -2,6 +2,8 @@
 
 This repository provides tools for both data preparation and mission analysis of robotic systems.
 
+![abstract](src/img/abstract.png "Robot & Process Mining Core Idea")
+
 * *Data Preparation*: A set of scripts automatically processes raw data collected during robot execution, converting it into structured event logs ready for process mining. These scripts are designed specifically for ROS-based systems, leveraging ROS as the standard for robot software development.
 
 * *Mission Analysis*: The included RoboTrace tool supports process discovery and enhancement from multiple perspectives, enabling deep insights into robotic behavior and workflows via process mining.
