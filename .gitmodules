@@ -1,0 +1,6 @@
+[submodule "robot_data_preparation"]
+	path = robot_data_preparation
+	url = https://github.com/SaraPettinari/robot_data_preparation
+[submodule "robotrace"]
+	path = robotrace
+	url = https://github.com/SaraPettinari/robotrace
