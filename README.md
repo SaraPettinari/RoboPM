@@ -5,9 +5,15 @@ This repository provides tools for both data preparation and mission analysis of
 ![abstract](src/img/abstract.png)
 *Fig. 1: Robot & Process Mining Core Idea*
 
-* **_Data Preparation_**: A set of scripts automatically processes raw data collected during robot execution, converting it into structured event logs ready for process mining. These scripts are designed specifically for ROS-based systems, leveraging ROS as the standard for robot software development.
+## Components 
 
-* **_Mission Analysis_**: The included RoboTrace tool supports process discovery and enhancement from multiple perspectives, enabling deep insights into robotic behavior and workflows via process mining.
+* **_Data Preparation_**: A set of scripts for automatically processes raw data collected during robot execution, converting it into structured event logs ready for process mining. These scripts are designed specifically for ROS-based systems, leveraging ROS as the standard for robot software development.
+
+    _ref submodule_: `robot_data_preparation` contains the scripts enabling the processing of robotic event logs [[repo](https://github.com/SaraPettinari/robot_data_preparation)].
+
+* **_Mission Analysis_**: The included RoboTrace tool supports process discovery and enhancement from multiple perspectives, enabling deep insights into robotic behavior and workflows via process mining complemented with visual analytics.
+
+    _ref submodule_: `robotrace` contains the tool enabling multi-perspective analysis of robotic systems using process mining and visual analytics [[repo](https://github.com/SaraPettinari/robotrace/tree/main-2.0)].
 
 Both components can be used independently or together, offering flexibility depending on your workflow needs.
 
@@ -21,10 +27,6 @@ The reference methodology aims to support the robotic developer in the automatic
 
 The methodology has been designed to foster the application of process mining and the development of techniques suitable for robotic systems. It allows the system designer to specify tags in the source code and transform them into events to be inserted into the log. The generated event logs are enriched with multi-perspective information (as space, communication, and battery), thus defining a multi-perspective event log, suitable for the application of process mining techniques.
 
-## Submodules
-- **robot_data_preparation**: contains the scripts enabling the processing of robotic event logs [[repo](https://github.com/SaraPettinari/robot_data_preparation)].
-
-- **robotrace**: contains the tool enabling multi-perspective analysis of robotic systems using process mining and visual analytics [[repo](https://github.com/SaraPettinari/robotrace/tree/main-2.0)].
 
 ## References
 * Pettinari, S., Re, B., Rossi, L., Tiezzi, F. Enhancing Robotic Mission Analysis via Process Mining and Visual Analytics. (_under review_)
