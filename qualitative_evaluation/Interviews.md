@@ -14,7 +14,7 @@ _Material Used_: `evaluation-slides.pdf` and `RoboTrace` tool
 
 The interviewer introduced the goal of the session, namely to evaluate a methodology for robotic mission analysis combining process mining and visual analytics. The main concepts of mission analysis, process mining, and visual analytics were briefly explained.
 
-The interviewer described the overall methodology, composed of a data preparation phase and an analysis phase. In the data preparation phase, activity tags are integrated into the robotic codebase, mission executions are recorded (e.g., using ROS bags), and the collected data are processed into a structured event log. In the analysis phase, a process model is discovered from the event log and enriched with contextual perspectives such as spatial information, energy consumption, and communication.
+The interviewer described the overall methodology, composed of a data preparation phase and an analysis phase. In the data preparation phase, activity tags are integrated into the robotic codebase, mission executions are recorded (using ROS bags), and the collected data are processed into a structured event log. In the analysis phase, a process model is discovered from the event log and enriched with contextual perspectives such as spatial information, energy consumption, and communication which drives the reasoning step.
 
 ## Participant_1: Interview
 
@@ -61,3 +61,52 @@ In contrast, having activities explicitly linked to contextual data allows this 
 One additional feature that could be useful is a time-based visualization, such as a timeline or schedule view of the executed tasks. A representation where tasks are shown along a temporal axis—possibly color-coded by robot—could make it easier to reason about task duration and sequencing at a glance.
 
 Such a timeline could also be combined with battery information, as battery consumption within a task may not be linear over time. While this information can already be derived from the existing visualizations and the process model, a dedicated time-based view could improve intuitiveness, especially for users primarily interested in temporal aspects. That said, I do not consider this a core missing feature, as the same information is already available through the current representations.
+
+
+## Participant_2: Interview
+
+### EQ1: How would you assess the effort required to define and integrate activity tags for a robotic mission? In which scenarios do you think tagging would be feasible, and in which might it become impractical?
+I don’t think it adds a lot of effort. The example shown looked like just a few lines of code, so overall I would say the effort is small and it can be done.
+
+Tagging seems feasible when we talk about high-level activities and there are not too many of them. In that case it is easy.
+
+A situation that could become problematic is when one activity happens in the middle of another activity, such as parallel or nested behavior. In those cases you might end up mixing information. Also, robotics control structures like behavior trees introduce reactivity: if something fails during an activity, the robot may start another activity immediately. In that case, logging only start and complete may not be enough, and it would be useful to include additional lifecycle states such as failure, suspended, or aborted.
+
+Overall, if the engineer understands the activities well and can define them as reasonably atomic, I don’t see major issues.
+
+### EQ2: Based on the process model, can you describe what happened during the mission?
+Yes. From the model I can understand what was executed.
+
+I interpreted it as a team of robots. First there is a takeoff, then the system explores the field. When a weed is found, a message is sent to inform others. Then someone receives that message and the weed position is communicated to a tractor. The tractor receives the information and goes there to remove the weed.
+
+I find the “message send / message receive” distinction interesting because it supports understanding the communication steps. Also, the frequency information helps: small numbers indicate rare transitions, while larger numbers show the main flow of the mission. This is useful for getting an overview, and it also suggests that you can filter out infrequent behavior when you want to focus on the typical mission path.
+
+### EQ3: Did any of these perspectives influence or refine your understanding of the mission, and how did the combination of the process view and the visualizations affect your reasoning?
+Yes, these perspectives are useful. The process model itself is already interesting and, in a ROS context, would be a novelty to have as a summary of the mission. But typically I also rely a lot on plots to understand what happened, so I think these visualizations are necessary.
+
+The most valuable aspect is the correlation between low-level data (space, battery, communication) and the high-level activities. The graphs help me understand what happened, and if they are connected to the activities, then they become much more informative.
+
+Right now, the plots and the process model are not fully linked interactively (e.g., clicking an activity in the model to highlight the corresponding region in a plot), but even without that, having both views helps reasoning. If there were stronger visual linking (for example consistent color mapping or direct selection), it could support exploration even better.
+
+Overall, the additional perspectives provide an extra layer of reasoning beyond the activity sequence alone, and they help interpret issues such as energy-heavy activities or communication-related behavior.
+
+### EQ4: How would you normally analyze a mission like this using the tools or data you currently have?
+Other than an approach like this, I would analyze it by reading logs and trying to understand what happened. A better way to handle logs is usually plotting them, but it is still manual.
+
+Another approach I use in my work is monitoring or requirements-driven analysis: having high-level specifications or monitors that can read the logs and detect violations, telling you which requirement failed. This is another way to analyze how a mission went, especially for failures.
+
+So, in practice, it is mainly log reading, plotting, and possibly requirement-based monitoring.
+
+### EQ5: Do you think you could have reached similar conclusions using your usual tools or approaches? Why or why not?
+No, not really, at least not to the same extent. If I only use log reading, it would be very hard to get an overall view of the mission like the one I can get from the process model.
+
+Also, it would be much harder to spot edge cases, meaning rare transitions or infrequent behavior. Those are easier to see when the model shows frequencies and when you can filter.
+
+I think the approach supports a more in-depth analysis and helps mission engineers understand what happened better than they would by manually looking at logs.
+
+### Anything to add?
+I think it is very nice and very helpful. I believe roboticists would be happy to have such tools, especially if they work out of the box.
+
+I particularly liked the communication aspects. At the process level, I would like to see communication “between who and who”, i.e., more explicit separation of agents/robots in the model.
+
+More broadly, I think robotic mission engineering can be approached bottom-up (as in your work), top-down (model-driven or requirement-driven), or with a hybrid approach. I find the hybrid direction interesting—for example combining behavior-tree-driven logging with process mining, and possibly integrating requirement monitoring on top of the discovered model.
