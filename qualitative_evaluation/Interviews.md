@@ -2,9 +2,9 @@
 
 _Interview type_: [Qualitative Surveys (Interview Studies)](https://github.com/acmsigsoft/EmpiricalStandards/blob/master/docs/standards/QualitativeSurveys.md)
 
-_Duration_: ~60 minutes per participant
+_Duration_: ~40-60 minutes per participant
 
-_Participant_: Robotics researcher with experience in ROS (see profiles.md for more info)
+_Participant_: Robotics researcher with experience in ROS (see `profiles.md` for more info)
 
 _Recording_: transcript reconstructed from available audio and interviewer notes
 
@@ -110,3 +110,56 @@ I think it is very nice and very helpful. I believe roboticists would be happy t
 I particularly liked the communication aspects. At the process level, I would like to see communication “between who and who”, i.e., more explicit separation of agents/robots in the model.
 
 More broadly, I think robotic mission engineering can be approached bottom-up (as in your work), top-down (model-driven or requirement-driven), or with a hybrid approach. I find the hybrid direction interesting—for example combining behavior-tree-driven logging with process mining, and possibly integrating requirement monitoring on top of the discovered model.
+
+
+## Participant_3: Interview
+
+### EQ1: How would you assess the effort required to define and integrate activity tags for a robotic mission? In which scenarios do you think tagging would be feasible, and in which might it become impractical?
+In terms of pure implementation effort, I don’t think it is particularly high. If you know what you want to tag, adding the tags is straightforward and can be done quickly. The technical part is simple.
+
+The main difficulty is not the implementation, but deciding what to tag. Defining the right level of abstraction is the hardest part. You have to decide which activities are meaningful at a high level and which details can be ignored. This is more of a conceptual and design problem than a programming one.
+
+I think tagging is feasible when there is a good understanding of the scenario and the mission, especially if the developer or a domain expert knows the system well. In those cases, it is easier to decide which activities are important to observe. On the other hand, tagging becomes impractical when there is little knowledge of the scenario and you do not fully understand what is important to monitor. In those situations, it is difficult to decide what should be tagged and at which level of abstraction.
+
+Some guidelines or conceptual examples on how to choose the abstraction level could be helpful. The technical part is easy; the challenging part is the modeling decision behind the tags.
+
+### EQ2: Based on the process model, can you describe what happened during the mission?
+Yes, to a certain extent, the process model allows me to understand what happened during the mission. At a high level, it reconstructs the sequence of activities that were executed and how the mission evolved over time.
+
+How much I can understand really depends on the complexity of the mission and on the abstraction level used for tagging. For relatively simple missions or when the abstraction level is well chosen, the process model gives a clear picture of the mission flow. I can see which activities occurred, in which order, and how often.
+
+However, when the system becomes very complex or highly variable, understanding exactly what happened becomes harder. If the abstraction level is too low, the model can explode into something similar to a large state machine, which becomes difficult to read. In that case, I may understand roughly what happened, but not easily pinpoint what happened at a specific moment without further filtering or analysis.
+
+In general, the process model is useful for reconstructing the mission at a high level, but its effectiveness depends heavily on the chosen abstraction.
+
+### EQ3: Did any of these perspectives influence or refine your understanding of the mission, and how did the combination of the process view and the visualizations affect your reasoning?
+Yes, they helped, especially because each perspective captures a different aspect of the mission.
+
+I appreciate that these perspectives are kept separate rather than merged into a single visualization. If everything were shown at once, it would become unreadable. Having separate but coordinated views makes it easier to reason step by step.
+
+That said, this approach is more suited for understanding and explanation than for fine-grained verification. It helps me see what happened and notice suspicious patterns, but it does not automatically tell me whether something went wrong according to a formal property.
+
+### EQ4: How would you normally analyze a mission like this using the tools or data you currently have?
+
+My background is more in verification and monitoring.
+Normally, I would start from an explicit idea of what the mission is supposed to do. I would have a mental or written specification of the expected behavior, and then I would analyze execution data to see whether the mission was satisfied or not.
+
+With current tools, analysis is often either very high-level, such as checking whether the mission completed successfully, or very low-level, such as inspecting raw logs or trajectories. For example, if a mission ends because the battery is depleted, I would want to understand whether there were suboptimal movements or unnecessary actions that caused excessive energy consumption.
+
+For example, in past projects, I had situations where robots adapted their strategies at runtime (e.g., replanning paths when obstacles were encountered). From raw logs or simple plots, it was difficult to understand whether those adaptations actually occurred or worked as intended.
+
+
+### EQ5: Do you think you could have reached similar conclusions using your usual tools or approaches? Why or why not?
+No, not really. I am not aware of other approaches that provide this kind of high-level mission abstraction combined with contextual information.
+
+With existing tools, I could eventually understand parts of the behavior, but getting a global picture of the mission and identifying rare or unexpected behavior would be much harder. In particular, understanding sequences such as navigation attempts, failures, and replanning steps would require significant manual effort.
+
+Having an explicit process representation of what happened could confirm whether expected behaviors, like replanning after encountering obstacles, actually took place.
+
+### Anything to add?
+I find the approach useful, especially for explainability and postmortem understanding of robotic behavior. 
+However, I also see its limits: some behaviors are difficult to judge visually, and understanding whether a specific action was correct may still require additional reasoning or formal properties.
+
+In the long term, I think this approach could be complemented with property-based or requirement-based analysis. For example, associating property violations with specific transitions or activities in the process model could strengthen the analysis.
+
+However, as a tool for reconstructing, exploring, and explaining what happened during a mission, I think this approach fills an important gap compared to existing tools.
