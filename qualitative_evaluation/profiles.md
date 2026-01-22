@@ -28,3 +28,11 @@ The participant’s work is centered on applied research in Internet-of-Things (
 Their research focuses on the integration of IoT systems for seamless control and real-time data provision across heterogeneous platforms. This includes research topics such as software architecture, software and data quality requirements, and runtime monitoring for dependable operation. The participant has experience with both maritime and emerging space-domain application scenarios.
 
 Prior to their academic career, the participant worked as a software engineer in a multidisciplinary R&D laboratory, contributing to the development, integration, and deployment of autonomous systems, including underwater, surface, and aerial vehicles, drifting sensor platforms, and communication gateways.
+
+# Participant_5
+The participant is an early-career academic with a background in Computer Science and Mathematics and currently holds a faculty position in the area of information systems and process technologies.
+
+The participant’s work is centered on applied and methodological research in distributed systems, with particular emphasis on Blockchain technologies and their integration into Business Process Management (BPM).
+
+Their research focuses on the design, analysis, and implementation of solutions to support trustworthy, transparent, and automated processes. 
+In parallel, the participant has a strong involvement in robotics education and applied robotics, and is currently responsible for teaching a robotics course that addresses both theoretical foundations and hands-on aspects of robotic systems.

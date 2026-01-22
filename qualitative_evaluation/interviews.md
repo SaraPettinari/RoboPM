@@ -222,3 +222,41 @@ Overall, I don’t think I would reach the same combined conclusions as easily w
 ### Anything to add?
 
 I think it would be interesting to see an extension toward monitoring, not only post-mortem analysis, especially given the multi-robot and communication aspects.
+
+
+## Participant_5: Interview
+
+### EQ1: How would you assess the effort required to define and integrate activity tags for a robotic mission? In which scenarios do you think tagging would be feasible, and in which might it become impractical?
+On paper the effort is low: you only add those tags in the code. From a purely implementation point of view, inserting topic publishes is straightforward in ROS.
+
+The real challenge is distributed or collaborative scenarios. When the mission is spread across many nodes, classes, or codebases, it becomes harder to place tags correctly. Typical mistakes I can imagine are: syntactic/programming errors when adding tags (fixable);logging start/end at the wrong places (e.g., logging start of activity A at the end of A), which corrupts the semantics; missing tags because you don’t know where to place them and you therefore lose parts of the trace.
+
+So it’s feasible when you control the code and understand the architecture. However, to reduce human error, it would be useful to provide best-practice patterns or anchor points in a reference ROS codebase so developers have concrete snippets to copy.
+
+### EQ2: Based on the process model, can you describe what happened during the mission?
+Yes. From the process model I see the expected high-level flow: the drone takes off, explores the field, detects a weed, sends the weed position, and tractors receive the position. The drone selects the nearest tractor and sends the instruction; the selected tractor moves and performs the cutting (cut grass), then returns to base. Eventually the mission ends.
+
+One warning: the process graph aggregates activities across robots and does not automatically distinguish which resource executed which activity. That’s why filtering by robot (e.g., show only the drone) is important to disambiguate. When filtered to the drone perspective, the sequence is clearer.
+
+### EQ3: Did any of these perspectives influence or refine your understanding of the mission, and how did the combination of the process view and the visualizations affect your reasoning?
+They are useful enhancements. The mission sequence is understandable from the process model alone, but the additional plots give important details about robot behavior.
+Space shows where the robot moved and helps distinguish good navigation from cases where the drone got stuck.
+Energy highlights which tasks are energy-intensive and can reveal defective batteries that drain faster.
+Communication shows counts of sent/received messages and lost messages; this can reveal communication issues.
+
+These perspectives don’t change the high-level story, but they help pinpoint behaviors and anomalies that are not visible in the sequence alone (e.g., which task consumed the most energy or when messages were lost).
+
+### EQ4: How would you normally analyze a mission like this using the tools or data you currently have?
+It depends on the available logs. Typically I would start by checking robot logs (warnings/errors/hardware issues).
+If the system’s lifecycle is structured into missions/tasks, you can reconstruct similar sequences from logs or even from code.
+
+But usual toolchains are fragmented: you inspect logs and then use separate tools for each perspective. The integrated correlation across process + space + energy + communication offered here is not common in my experience.
+
+### EQ5: Do you think you could have reached similar conclusions using your usual tools or approaches? Why or why not?
+Partly. If you had exactly the same, comprehensive logs (including tags, battery, communication metadata), you could reach similar conclusions, but you would probably need to stitch together multiple tools and spend more time. If the logging is not structured (no tags), reproducing the same analysis is harder.
+
+So this approach is faster and more comprehensive when the data are collected in the structured way you propose. With traditional, unstructured logs you could achieve similar results, but with more difficulty, more tools, and more manual correlation.
+
+
+### Anything to add?
+I suggested adding a graph-based communication visualization (a social/network or graph view): nodes = robots, edges = topics/messages. Right now the communication view reports counts per topic; a graph-based view would let you see who communicates with whom, which nodes are central (possible bottlenecks), and help spot overloaded robots or communication-pattern bugs without switching tools.
