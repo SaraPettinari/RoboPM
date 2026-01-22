@@ -19,3 +19,12 @@ The participant is a full professor in Computer Science and Software Engineering
 Their academic background covers both Software Engineering and Computer Science, with experience in solution-oriented and knowledge-oriented research. Their main research interests focus on software architecture and autonomous systems, particularly in the automotive and robotics domains. 
 
 The participant has published extensively in international journals and conferences and serves as a program committee member and reviewer for several international venues. They have worked in multiple international research contexts, have extensive experience in european research projects, and actively collaborate with industrial partners.
+
+# Participant_4
+The participant is a postdoctoral researcher with a background in Computer Science and Software Engineering.
+
+The participant’s work is centered on applied research in Internet-of-Things (IoT) systems engineering, with particular emphasis on autonomous and sensor-based systems operating in uncontrolled environments.
+
+Their research focuses on the integration of IoT systems for seamless control and real-time data provision across heterogeneous platforms. This includes research topics such as software architecture, software and data quality requirements, and runtime monitoring for dependable operation. The participant has experience with both maritime and emerging space-domain application scenarios.
+
+Prior to their academic career, the participant worked as a software engineer in a multidisciplinary R&D laboratory, contributing to the development, integration, and deployment of autonomous systems, including underwater, surface, and aerial vehicles, drifting sensor platforms, and communication gateways.

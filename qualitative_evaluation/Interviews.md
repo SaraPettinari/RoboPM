@@ -163,3 +163,62 @@ However, I also see its limits: some behaviors are difficult to judge visually, 
 In the long term, I think this approach could be complemented with property-based or requirement-based analysis. For example, associating property violations with specific transitions or activities in the process model could strengthen the analysis.
 
 However, as a tool for reconstructing, exploring, and explaining what happened during a mission, I think this approach fills an important gap compared to existing tools.
+
+
+## Participant_4: Interview
+
+### EQ1: How would you assess the effort required to define and integrate activity tags for a robotic mission? In which scenarios do you think tagging would be feasible, and in which might it become impractical?
+
+From what I know about ROS, the mechanism you used is common practice. Publishing information as a topic and recording it in the same pipeline should not add much burden for the developer, at least at the implementation level.
+
+The main requirement is that you need to know where activities are triggered so you can place the tags at the right points. If you control the code, I think it should generally be feasible, because you should be able to identify where actions begin and end.
+
+I struggled to find a clear case where it would be not feasible, assuming you have control of the code. If you own the codebase, you can usually tag it. Also, in some robotic architectures I’ve seen, tagging could potentially be generated automatically, for example, if there is a structured lifecycle management for execution (task-by-task), it might be easier to derive these tags directly from the code.
+
+### EQ2: Based on the process model, can you describe what happened during the mission?
+
+Yes, I find the process view quite intuitive for understanding activities and their order. I like that it communicates the mission behavior clearly as a sequence of steps.
+
+One improvement I would suggest is adding explicit information about which node/robot executed each activity, because as it stands I infer it (e.g., I assume takeoff is performed by the drone), but it would help analysis if it were visible in the model.
+
+I also appreciated the color coding, because if many things happen during the mission it helps to focus on what is “more expensive” (e.g., resource-heavy) or on potential bottlenecks. Overall, the visualization style feels familiar and intuitive.
+
+### EQ3: Did any of these perspectives influence or refine your understanding of the mission, and how did the combination of the process view and the visualizations affect your reasoning?
+
+Yes, the added perspectives refine what I get from the process view, especially energy consumption, because energy is often a critical aspect in robotics and it makes sense to correlate it with activities.
+
+Regarding the space visualization, I understand the motivation, especially for cases like post-mortem analysis when something goes wrong (e.g., the drone crashes or gets stuck). In those situations, seeing patterns like “proper navigation vs. stuck behavior” can be very useful.
+
+My main question on the space perspective was whether it would sometimes be better to visualize geographical location / map-based information rather than only space occupancy. I can imagine that whether this matters depends on the use case: if the robot always operates in the same place, maybe map-based views add less; but in other settings, they could be valuable. In general, if you have a real use case you can refine the visualization accordingly.
+
+I also think it could be interesting to add process-model coloring not only by frequency/performance but also by energy/resource consumption, so the process view itself highlights where energy is spent (e.g., a dedicated “energy” overlay, analogous to existing frequency/performance views).
+
+For communication, I found it useful to show received vs. lost messages. I wondered whether it would be possible to see in which specific cases messages were lost. As I understood it, right now that requires filtering case-by-case first, and then analyzing. That seems workable, but deeper drill-down could help.
+
+Overall, I like the idea of correlating these lower-level perspectives with the process activities. The separation into distinct views also helps avoid overwhelming the user.
+
+### EQ4: How would you normally analyze a mission like this using the tools or data you currently have?
+
+In my experience, I often use robot- or vendor-specific tools that provide domain-specific visualizations depending on the robot’s sensors and control architecture.
+
+As a developer, if I need to understand control behavior during operation—especially for people working close to lower-level control (e.g., PID), it can be useful to look at things like the robot’s attitude over time, but this depends heavily on the system and the user.
+
+In one system I used, the lifecycle was already organized into missions as a sequence of tasks sent to the robot, with some modes between tasks. In that case, you could reconstruct something like a process view from logs, or even generate it from the code. However, those tools did not provide a strong way to correlate the high-level activity sequence with additional perspectives like energy or communication in the way shown here.
+
+So to me, the correlation across perspectives is a differentiator compared with the tools I’ve used.
+
+### EQ5: Do you think you could have reached similar conclusions using your usual tools or approaches? Why or why not?
+
+Some aspects are similar to what I’ve seen elsewhere—especially bottleneck detection, which I recognize from other robotic mission design and log analysis tools.
+
+However, I find the energy visualization particularly relevant, because even when energy was important in my past work, the tools did not always provide rich ways to visualize energy drops or battery-related issues in a way that connects directly to mission activities.
+
+For communication, I don’t recall having comparable metrics like message loss visualization. I also realize that this is possible here because the system records that messages were sent in the first place, so you can reason about loss vs. receipt.
+
+Another point I only fully realized during the discussion is that the tool is designed for multi-robot scenarios by design, which is not always the case for typical tools.
+
+Overall, I don’t think I would reach the same combined conclusions as easily with my usual tools, especially because this approach combines the process view with multiple correlated perspectives.
+
+### Anything to add?
+
+I think it would be interesting to see an extension toward monitoring, not only post-mortem analysis, especially given the multi-robot and communication aspects.
