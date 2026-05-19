@@ -109,7 +109,7 @@ I think it is very nice and very helpful. I believe roboticists would be happy t
 
 I particularly liked the communication aspects. At the process level, I would like to see communication “between who and who”, i.e., more explicit separation of agents/robots in the model.
 
-More broadly, I think robotic mission engineering can be approached bottom-up (as in your work), top-down (model-driven or requirement-driven), or with a hybrid approach. I find the hybrid direction interesting—for example combining behavior-tree-driven logging with process mining, and possibly integrating requirement monitoring on top of the discovered model.
+More broadly, I think robotic mission engineering can be approached bottom-up (as in your work), top-down (model-driven or requirement-driven), or with a hybrid approach. I find the hybrid direction interesting, for example combining behavior-tree-driven logging with process mining, and possibly integrating requirement monitoring on top of the discovered model.
 
 
 ## Participant_3: Interview
@@ -209,7 +209,7 @@ So to me, the correlation across perspectives is a differentiator compared with 
 
 ### EQ5: Do you think you could have reached similar insights or conclusions using your usual tools or approaches?
 
-Some aspects are similar to what I’ve seen elsewhere—especially bottleneck detection, which I recognize from other robotic mission design and log analysis tools.
+Some aspects are similar to what I’ve seen elsewhere, especially bottleneck detection, which I recognize from other robotic mission design and log analysis tools.
 
 However, I find the energy visualization particularly relevant, because even when energy was important in my past work, the tools did not always provide rich ways to visualize energy drops or battery-related issues in a way that connects directly to mission activities.
 
